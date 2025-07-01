@@ -18,4 +18,4 @@ These are default credentials. You can change them after you log in.
 
 Once you have logged in the application, you are ready to start integration configuration. Click [Overview of Integration](../Manage/Administrator/schedular.md) to understand how to start using OpsHub Integration Manager for integration.
 
-{% include "download.md" %}
+{% include "../.gitbook/includes/download.md" %}
