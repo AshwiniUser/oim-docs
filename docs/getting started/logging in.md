@@ -16,4 +16,4 @@ These are default credentials. You can change them after you log in.
 * Log in as username **admin** and password **password**. These are default username and password. You can change them from profile once you log in.
 * If you have configured OpsHub Integration Manager for HTTPS, then enter the URL as https://localhost:8443/OIM/ in browser.
 
-Once you have logged in the application, you are ready to start integration configuration. Click [Overview of Integration](prerequisites.md) to understand how to start using OpsHub Integration Manager for integration.
+Once you have logged in the application, you are ready to start integration configuration. Click [Overview of Integration](Prerequisites.md#supported-operating-systems) to understand how to start using OpsHub Integration Manager for integration.
