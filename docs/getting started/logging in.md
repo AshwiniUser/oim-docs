@@ -9,7 +9,7 @@ Let's see how you can get started with OpsHub Integration Manager.
 
 These are default credentials. You can change them after you log in.
 
-![Getting Started Screenshot](assets/Getting_Started_With_Application_Image_1G_a.png)
+![Getting Started Screenshot](../assets/Getting_Started_With_Application_Image_1G_a.png)
 
 # Linux
 * For Linux, once the installation is done, enter the URL as http://localhost:8989/OIM/ in browser.
