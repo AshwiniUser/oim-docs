@@ -1,0 +1,7 @@
+navigation:
+  - title: Getting Started
+    pages:
+      - title: Download & Setup
+        path: docs/getting-started/download.md
+      - title: System Requirements
+        path: docs/getting-started/prerequisites.md
