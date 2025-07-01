@@ -3,8 +3,8 @@ root: docs/README.md
 navigation:
   - title: Getting Started
     pages:
-      - docs/getting-started/download.md
-      - docs/getting-started/prerequisites.md
-      - docs/getting-started/windows-installation/prerequisites.md
-      - docs/getting-started/logging-in.md
-      - docs/getting-started/start-or-stop-service.md
+      - path: docs/getting-started/download.md
+      - path: docs/getting-started/prerequisites.md
+      - path: docs/getting-started/windows-installation/prerequisites.md
+      - path: docs/getting-started/logging-in.md
+      - path: docs/getting-started/start-or-stop-service.md
