@@ -1,4 +1,5 @@
 
+|------------------|------|-----------|------|-------------|
 | **entityMention** |  | False |  |  |
 |  | **mentionDetails** | True |  |  |
 |  | **fieldDataType** | True | Enum | Type of entity mention detection system for field or comment. Each type correlates with a data type of field or comment. <br><br>For example: **HTML**, **WIKI**, **MARKDOWN**, **TEXT**, **HTML_REGEX** (If mention containing field is HTML type and all mentions are not detected with HTML selector, instead provide **HTML_REGEX** enum and a regex in `selectorOrRegex` that can detect the mention). |
