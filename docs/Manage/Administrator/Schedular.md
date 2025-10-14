@@ -1,5 +1,4 @@
-| Parent Parameter | Name | Required | Type | Description |
-|------------------|------|-----------|------|-------------|
+
 | **entityMention** |  | False |  |  |
 |  | **mentionDetails** | True |  |  |
 |  | **fieldDataType** | True | Enum | Type of entity mention detection system for field or comment. Each type correlates with a data type of field or comment. <br><br>For example: **HTML**, **WIKI**, **MARKDOWN**, **TEXT**, **HTML_REGEX** (If mention containing field is HTML type and all mentions are not detected with HTML selector, instead provide **HTML_REGEX** enum and a regex in `selectorOrRegex` that can detect the mention). |
@@ -13,3 +12,4 @@
 |  | **entityURLDetails** | False |  | This field supports reverse sync for source URL/target URL option.<br><br>Provide the matcher or selector for the matching entity URL of the end system.<br>If the system supports HTML mentions, provide a JSoup matcher for URLs within `href`.<br>If the system supports Wiki, provide a regex for URLs.<br>If both HTML and Wiki mentions are supported, provide a list of entity URL details in mention metadata. |
 |  | **entityWebURLMatcher** | False | String | Contains regex or selector to match entity web URL. |
 |  | **entityIdDataSelector** | False | String | Contains regex to read the entity id from the web URL. |
+
