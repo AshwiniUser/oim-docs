@@ -1,4 +1,4 @@
-
+| Parameter | Name | Required | Type | Description |
 |------------------|------|-----------|------|-------------|
 | **entityMention** |  | False |  |  |
 |  | **mentionDetails** | True |  |  |
