@@ -1,64 +1,15 @@
-All the users in OpsHub Integration Manager, who have a 'Professional' or 'Ultimate' license , will have access to 'Job Schedules' [which are associated with the integrations].
-
-# Create Schedules
-
-To create a new schedule, follow the steps given below:
-* Click on **"Administration"**
-* Click on ![Custom Scheduler](assets/Custom_Scheduler.png) given on the left panel. You can see the list of schedules that are already created
-* To create a new schedule, click on ![Plus](assets/Plus.png) given on the top right corner of the screen
-
-![Custom Scheduler Create](assets/Custom_Scheduler_Create.png)
-
-* The Create Schedule screen will open. Fill the following details:
-  * **Schedule Name**: Give the name of the schedule which you will create.
-  * **Schedule Type**: Select the type of schedule which you want to create:
-    * **Fix Schedule**: Integration will check for updates in end system at specified schedule.
-    * **Interval Repetition**: Integration will check for the updates in end system at selected interval.
-  * **Frequency**: Select the time duration at which the integration wil check for updates.
-
-| **Schedule Type**     | **Frequency** | **Fields**           | **Description**                                                                                                                                               |
-|-----------------------|---------------|-----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Interval Repetition** | All           | Repeat Interval       | It represents the unit of interval, i.e., MINUTES, HOURS, WEEKS, DAYS, SECONDS (If you select '5' as repeat interval and 'MINUTES' as unit, then integration will check for the updates every 5 minutes) |
-| **Fix scheduler**      | All           | Start Time            | It represents the date and time from which the scheduler will start checking for updates in the end system.                                                  |
-|                       |               | End Time              | It represents the date and time until the scheduler keeps checking for updates in the end system.                                                            |
-|                       |               | Time                  | It represents the time at which the integration needs to check for updates in end system. Maximum 5 time slots can be given.                                |
-|                       | Monthly        | Day                   | It represents the day at which the integration will check for the updates in the end system.                                                                 |
-|                       |               | Week of Month         | It represents the week at which the integration needs to check for the updates in the end system.                                                            |
-|                       | Weekly         | Day(s)                | It represents the day(s) at which the integration needs to check for the updates.                                                                            |
-
-* Click on **"Save"**.
-
-# Edit Schedule
-
-* System generated schedules can't be edited
-* To edit the schedule which is associated with active integration, first you need to inactivate the integration and then you can edit
-
-* To edit a schedule, follow the steps given below:
-  * Click on **"Administration"**
-  * Click on ![Custom Scheduler](assets/Custom_Scheduler.png) given on the left panel. You can see the list of schedules that are already created
-  * To edit a schedule, click on ![Edit Icon](assets/Custom_Scheduler_EditIcon.png) at the end of the corresponding schedule that you want to edit
-
-![Custom Scheduler Edit](assets/Custom_Scheduler_Edit.png)
-
-* The Edit Schedule form will open. Edit the details in the form. Refer to the image below:
-
-![Custom Scheduler Form](assets/Custom_Scheduler_Form.png)
-
-* Click on **"Save"**
-* Click on **"Reset"** to set the previous saved value
-
-# Delete Schedule
-
-* System generated schedules can't be deleted
-* To delete the schedule which is associated with any integration, first you need to remove this schedule from the integration and then you can delete 
-
-* To delete a schedule, click on ![Delete Icon](assets/Custom_Scheduler_DeleteIcon.png) at the end of a corresponding schedule that you want to delete
-
-![Custom Scheduler Delete](assets/Custom_Scheduler_Delete.png)
-
-* You will not be able to restore the schedule once you delete it
-
-![Custom Scheduler Delete Popup](assets/Custom_Scheduler_DeletePopup.png)
-
-* Click on **"Yes, delete it"** to delete the schedule
-* Click on **"Cancel"** to cancel the process
+| Parameter | Mandatory | Data Type | Description |
+|------------|------------|------------|--------------|
+| **entityMention** |  |  |  |
+| ├── **mentionDetails** | True |  |  |
+| ├── fieldDataType | True | Enum | Type of entitymention detection system for field or comment. Each type correlates with a data type of field or comment. <br><br> For e.g., HTML, WIKI, MARKDOWN, TEXT, HTML_REGEX (If mention containing field is HTML type and all mention are not detected with html selector, instead provide HTML_REGEX enum and provide a regex in selectorOrRegex that can detect the mention). |
+| ├── selectorOrRegex | True | List&lt;String&gt; | If the entitymention detection system used is of type WIKI or TEXT, return regex for which entity mention needs to be checked. <br><br> The regex must have only 1 group, corresponding to the entitymention's value as per fieldDataType. <br> Example: `\[~([a-z0-9.]+)\]` regex would search for all **~entitymention** tags. <br><br> If the entitymention detection system used is of type HTML, return the selector for which entity mention needs to be checked. <br> Example: `doc.select("a[href]")` would search for all anchor tags having href attribute. <br><br> If HTML tag selector didn't work, use HTML_REGEX as fieldDataType and return regex to search entitymention. <br> Example: return `"workitem\s(\d+)"` for searching entity with id 123 and 456 from data such as: <br> '&lt;p&gt; workitem 123 depends on workitem 456&lt;/p&gt;' <br> *It's important that regex has only 1 group and that one group captures the entity id of the mention.* |
+| ├── mentionTemplate | True | String | entityMention template that will be used to create an entityMention tag for the target system. <br><br> As template variables, following variables can be used: <br> ${entityId} : id of the entity <br> ${entityDisplayId} : display id of the entity <br> ${entityProject} : project name of the mention scope <br> ${entityProjectId} : project id of the mention scope <br> ${entityType} : entity type of the mention scope <br><br> As per various data types, mention templates can vary. <br><br> **Examples:** <br><br> HTML: &lt;a href="https://example.com/${projectId}/_entity/edit/${entityId}" data-vss-mention="version:1.0"&gt;#${entityDisplayId}&lt;/a&gt; <br><br> Resolved: &lt;a href="https://example.com/Prj-101/_entity/edit/101" data-vss-mention="version:1.0"&gt;#Bug-101&lt;/a&gt; <br><br> Wiki: https://example.com/browse/${entityId}\|smart-link <br><br> Resolved: https://example.com/browse/DCPA3-7\|smart-link <br><br> Text: ${entityId} &lt;${entityDisplayId}&gt; <br><br> Resolved: 101 &lt;Bug-101&gt; |
+| ├── **entityIdAttribute** | True |  | Parameters to specify the entity id to be read from text, regex, or HTML attribute name. <br> For HTML tag element, attribute name is required. <br> For Wiki, regEx is required. |
+| ├── dataAttributeName | False | String | This field is only required when fieldDataType is HTML. It can be null otherwise. <br> This field contains name of the HTML tag attribute which contains entity field value. <br> If fieldDataType is HTML and this field is null, HTML tag's inner text will be considered to have entity field value. |
+| ├── dataRegEx | False | String | This field is used to extract the entity information such as entity id, entity type, project id or project name from the text. <br> In case of HTML, this is used to extract entity information out of HTML tag attribute or inner text of the HTML tag. The HTML tag gets read using the selector provided in selectorOrRegex. <br><br> In case of WIKI, this is used to extract entity information out of matched text using the selector provided in selectorOrRegex. <br><br> This field is only required when fieldDataType is HTML and Id data has to be extracted from HTML tag attribute or inner text. This field can be null when fieldDataType is not HTML. It can also be null if one of the id field value is exact HTML attribute value or inner text. |
+| ├── **entityTypeAttribute** | False |  | If end system provides entity type corresponding to mentioned entity along with the mentioned entity id, then it is recommended to provide the meta information to extract or read entity type information from mentioned tag. <br> If this parameter is not given then OpsHub will search mentioned entity using mentioned id parameter without the entity type and it would be considered that entity id is sufficient; otherwise OpsHub will search mentioned entity using entity type along with id. <br><br> **Examples:** <br> HTML: &lt;a class="cke-link-popover-active" href="https://www.example.com/#/23468038167ud/defects?detail=/defect/669232438245"&gt;Entity101&lt;/a&gt; <br> WIKI: [DCPA3-7\|https://www.example.com/browse/DEFECT/DCPA3-7] [displayText\|url] <br> For above entity mentioned tag the text 'defect' in HTML example and 'DEFECT' in Wiki example is entity type. <br><br> WIKI: [DCPA3-7\|https://opshub.atlassian.net/browse/DCPA3-7] [displayText\|url] <br> For above tag: entity type does not exist as part of the mentioned tag, so end system does not require to provide this parameter entityTypeAttribute. |
+| ├── **entityProjectAttribute** | False |  | If end system provides project corresponding to mentioned entity along with the mentioned entity id, then it is recommended to provide the meta information to extract or read project information from mentioned tag. <br><br> If this parameter is not given then OpsHub will search mentioned entity using mentioned id parameter without the project, and it would be considered that entity id is sufficient; otherwise OpsHub will search mentioned entity using project along with entity id. <br><br> **Example:** <br> HTML: &lt;a href="https://www.example.com/40723eb0-0857-4970-a4f4-8cf657085847/_entity/edit/101" data-vss-mention="version:1.0"&gt;#Bug-101&lt;/a&gt; <br> WIKI: [DCPA3-7\|https://www.example.com/browse/TESTP/DCPA3-7] [displayText\|url] <br> For above entity mentioned tag the text '40723eb0-0857-4970-a4f4-8cf657085847' in HTML example and 'TESTP' in WIKI example is project of mentioned entity. <br><br> WIKI: [DCPA3-7\|https://www.example.com/browse/DCPA3-7] [displayText\|url] <br> For above tag: project does not exist as part of the mentioned tag, so end system does not require to provide this parameter entityProjectAttribute. |
+| ├── **entityURLDetails** | False |  | This field is required to support reverse sync for source url/target url option. Provide the matcher or selector for the matching entity url of the end system. <br> If end system supports mention in HTML, then provide jsoup matcher to match url within href. <br> If end system supports Wiki, then provide regex to match url. <br> In case end system supports mention in both types of fields, then provide list of entity url details to mention meta data. |
+| ├── entityWebURLMatcher | False | String | This field contains regex or selector to match entity web url. |
+| └── entityIdDataSelector | False | String | This field contains regex to read the entity id from web url. |
