@@ -1,16 +1,16 @@
-| Parameter | Required | Type | Description |
-|-----------|---------|------|------------|
+| Parameter | Name | Required | Type | Description |
+|-----------|------|----------|------|-------------|
 | **link** | False |  | Pass this parameter if you want to integrate entity relationship for a given entity type. Otherwise, do not send this parameter at all. Links APIs must be implemented to integrate links |
-| |**fieldNameInfo** | True | Object | <pre>{ "linkTypeFieldName": "linkType", "linkedEntityIdFieldName": "linkedEntityId", "linkedEntityTypeFieldName": "linkedEntityType", "linkedEntityScopeIdFieldName": "linkedEntityScopeId", "createdDateFieldName": "createdDate", "createdByFieldName": "createdBy", "linkCommentFieldName": "linkComment", "externalLinkUrlFieldName": "externalLinkUrl", "isExternalLinkFieldName": "isExternalLink" }</pre> |
-| | deleteSupported | True | Boolean | Does the system allow to delete link? |
+|  |**fieldNameInfo** | True | Object | <pre>{ "linkTypeFieldName": "linkType", "linkedEntityIdFieldName": "linkedEntityId", "linkedEntityTypeFieldName": "linkedEntityType", "linkedEntityScopeIdFieldName": "linkedEntityScopeId", "createdDateFieldName": "createdDate", "createdByFieldName": "createdBy", "linkCommentFieldName": "linkComment", "externalLinkUrlFieldName": "externalLinkUrl", "isExternalLinkFieldName": "isExternalLink" }</pre> |
+|  | deleteSupported | True | Boolean | Does the system allow to delete link? |
 | | historySupported | True | Boolean | Does the system support history for link? |
-| |createUpdateDateFormat | True | String | Date format for created and updated dates of link |
-| |**linkTypes** | True |  |  |
-| |linkType | True | String | Name of link type: Parent, Child, Relates To, Blocked By, etc |
-| |reverseLinkType | True | String | Name of its reverse link. E.g., if the link type is Parent, then the opposite linkType is Child, i.e. Entity E1 is the parent of entity E2, and E2 is the child of E1 |
-| |isMultiLinkAllowed | True | Boolean | True: If multiple links of this type can be created. False: if only one link of this type can be created. For example: Adding only one parent is allowed to be added for any entity, so set multiLinkAllowed to false for Parent Type. On the other hand, for the ‘Related’ link type, any number of links can be added, so send true |
-| |isLinkMandatory | True | Boolean | True: If link of this type is mandatory for entity create or update. False: If link of this type is not mandatory for entity create or update. For example, it might be mandatory to have a Parent link to another work item for sub-task or task entity type. In this case, send true for the Parent link type for Task |
-| |isBulkLinkingSupported | True | Boolean | True: If bulk linking is supported via API. False: If bulk linking is not supported via API. For example, Bug and task can be linked by relates link type. Multiple tasks (with link type - relates) can be added and removed via a single API. In this case, send true for relates link type for Bug |
+|  |createUpdateDateFormat | True | String | Date format for created and updated dates of link |
+|  |**linkTypes** | True |  |  |
+|  |linkType | True | String | Name of link type: Parent, Child, Relates To, Blocked By, etc |
+|  |reverseLinkType | True | String | Name of its reverse link. E.g., if the link type is Parent, then the opposite linkType is Child, i.e. Entity E1 is the parent of entity E2, and E2 is the child of E1 |
+|  |isMultiLinkAllowed | True | Boolean | True: If multiple links of this type can be created. False: if only one link of this type can be created. For example: Adding only one parent is allowed to be added for any entity, so set multiLinkAllowed to false for Parent Type. On the other hand, for the ‘Related’ link type, any number of links can be added, so send true |
+|  |isLinkMandatory | True | Boolean | True: If link of this type is mandatory for entity create or update. False: If link of this type is not mandatory for entity create or update. For example, it might be mandatory to have a Parent link to another work item for sub-task or task entity type. In this case, send true for the Parent link type for Task |
+|  |isBulkLinkingSupported | True | Boolean | True: If bulk linking is supported via API. False: If bulk linking is not supported via API. For example, Bug and task can be linked by relates link type. Multiple tasks (with link type - relates) can be added and removed via a single API. In this case, send true for relates link type for Bug |
 
 
 | Parameter | Name | Required | Type | Description |
@@ -57,6 +57,7 @@
 |  | **entityURLDetails** | False |  | This field supports reverse sync for source URL/target URL option.<br><br>Provide the matcher or selector for the matching entity URL of the end system.<br>If the system supports HTML mentions, provide a JSoup matcher for URLs within `href`.<br>If the system supports Wiki, provide a regex for URLs.<br>If both HTML and Wiki mentions are supported, provide a list of entity URL details in mention metadata. |
 |  | **entityWebURLMatcher** | False | String | This field contains regex or selector to match entity web url |
 |  | **entityIdDataSelector** | False | String | This field contains regex to read the entity id from web url |
+
 
 
 
