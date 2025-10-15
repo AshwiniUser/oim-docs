@@ -3,7 +3,7 @@
 | Parameter | Name | Required | Type | Description |
 |-----------|------|----------|------|-------------|
 | **link.rank** | **rank** | False |  | If entity type supports keeping ordering / ranking of entities, provide metadata for that.<br>e.g., If entities can be ranked and the rank is preserved in the end system, it supports rank.<br><br>In below example, order of 1.1, 1.2, 1.3 are stored and can also be changed and preserved.<br>Similarly order of 2.1 and 2.2 is also preserved.<br><pre>- 1<br>  - 1.1<br>  - 1.2<br>  - 1.3<br>- 2<br>  - 2.1<br>  - 2.2</pre><br>The order can be stored in a field, e.g., rank.<br>The order can also be maintained through siblings (before and after).<br><br>Pass null if rank is not supported by entity type in the end system. |
-| rankType |  | True | Enum | The way entities are ranked in the end system.<br><br>* **FLAT_SINGLE**: Entities of same type can only be ranked together.<br><pre>Bug1<br>Bug2<br>Bug3</pre><br>* **FLAT_MULTIPLE**: Entities of different types can be ranked together.<br><pre>`Bug1<br>Story1<br>Bug2<br>Story2`</pre><br>* **HIERARCHY_SINGLE**: Entities of same type can be ranked in a tree structure.<br><pre>Bug1<br>Bug2<br>  - Bug3<br>  - Bug4<br>Bug5</pre><br>* **HIERARCHY_MULTIPLE**: Entities of different types can be ranked together in a tree structure.<br><pre>'Epic 1<br>Story 1<br>&nbsp;&nbsp;- Bug 2<br>&nbsp;&nbsp;- Story 2<br>&nbsp;&nbsp;- Story 3<br>Epic 3'</pre> |
+| rankType |  | True | Enum | The way entities are ranked in the end system.<br><br>* **FLAT_SINGLE**: Entities of same type can only be ranked together.<br><pre>Bug1<br>Bug2<br>Bug3</pre><br>* **FLAT_MULTIPLE**: Entities of different types can be ranked together.<br><pre>`Bug1<br>Story1<br>Bug2<br>Story2`</pre><br>* **HIERARCHY_SINGLE**: Entities of same type can be ranked in a tree structure.<br><pre>Bug1<br>Bug2<br>  - Bug3<br>  - Bug4<br>Bug5</pre><br>* **HIERARCHY_MULTIPLE**: Entities of different types can be ranked together in a tree structure.<br><pre>Epic 1<br>Story 1<br>&nbsp;&nbsp;- Bug 2<br>&nbsp;&nbsp;- Story 2<br>&nbsp;&nbsp;- Story 3<br>Epic 3</pre> |
 
 
 | Parameter | Name | Required | Type | Description |
@@ -41,6 +41,7 @@
 |  | **entityURLDetails** | False |  | This field supports reverse sync for source URL/target URL option.<br><br>Provide the matcher or selector for the matching entity URL of the end system.<br>If the system supports HTML mentions, provide a JSoup matcher for URLs within `href`.<br>If the system supports Wiki, provide a regex for URLs.<br>If both HTML and Wiki mentions are supported, provide a list of entity URL details in mention metadata. |
 |  | **entityWebURLMatcher** | False | String | This field contains regex or selector to match entity web url |
 |  | **entityIdDataSelector** | False | String | This field contains regex to read the entity id from web url |
+
 
 
 
