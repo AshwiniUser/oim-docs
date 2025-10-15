@@ -1,5 +1,11 @@
 | Parameter | Name | Required | Type | Description |
 |------------|------|-----------|------|--------------|
+| **link.rank.scope** |  |  |  |  |
+|  | template | True | String | String template for rank scope.<br><br>What is the scope made of?<br><br>* If scope is just projectId, provide template as `{0}` and provide substitutes for projectId field name.<br>* If scope is projectId and entityType, provide template as `{0}{1}` and provide substitutes for projectId and entityTypeId field names.<br><br><pre>e.g., "{0}", "{0}{1}", "{0}::{1}", etc.</pre><br>If the projectId is 101 and entityType is 10001,<br><br>* If "{0}::{1}" is provided as template and substitutes are provided for projectId and entityTypeId, the actual scope will be "101::10001". |
+|  | substitutes| True | Object | Map containing all the substitute numbers used in template and field name that needs to be replaced against given substitute.<br>The substitute field name can be any field in the entity object.<br><br>**e.g.,**<br>If a template is "{0}::{1}", substitute map can be as follows:<br>`{"0": "projectIdFieldName", "1": "entityTypeIdFieldName"}`<br><br>In the template:<br>* The value of parameter {0} will be replaced with actual value of project id for the entity.<br>* The value of parameter {1} will be replaced with actual value of entity type id for the entity. |
+
+| Parameter | Name | Required | Type | Description |
+|------------|------|-----------|------|--------------|
 | **userMention** |  | False |  |  |
 | | userMentionDataType  | True | Enum | In the case of a given user mentioned, what data will SDK send for that user?<br>*USERNAME_AS_USER*: user's username<br>*EMAIL_AS_USER*: user's email address<br><br>Depending on the data type, OpsHub will search for required user information from the user API. |
 |  | **mentionDetails** | True |  |  |
@@ -27,6 +33,7 @@
 |  | **entityURLDetails** | False |  | This field supports reverse sync for source URL/target URL option.<br><br>Provide the matcher or selector for the matching entity URL of the end system.<br>If the system supports HTML mentions, provide a JSoup matcher for URLs within `href`.<br>If the system supports Wiki, provide a regex for URLs.<br>If both HTML and Wiki mentions are supported, provide a list of entity URL details in mention metadata. |
 |  | **entityWebURLMatcher** | False | String | This field contains regex or selector to match entity web url |
 |  | **entityIdDataSelector** | False | String | This field contains regex to read the entity id from web url |
+
 
 
 
