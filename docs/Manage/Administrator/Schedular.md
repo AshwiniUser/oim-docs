@@ -1,4 +1,4 @@
-| Parameter | Name | Required | Type | Description |
+| Parent Parameter | Name | Required | Type | Description |
 |------------------|------|-----------|------|-------------|
 | **entityMention** |  | False |  |  |
 |  | **mentionDetails** | True |  |  |
@@ -13,4 +13,5 @@
 |  | **entityURLDetails** | False |  | This field supports reverse sync for source URL/target URL option.<br><br>Provide the matcher or selector for the matching entity URL of the end system.<br>If the system supports HTML mentions, provide a JSoup matcher for URLs within `href`.<br>If the system supports Wiki, provide a regex for URLs.<br>If both HTML and Wiki mentions are supported, provide a list of entity URL details in mention metadata. |
 |  | **entityWebURLMatcher** | False | String | Contains regex or selector to match entity web URL. |
 |  | **entityIdDataSelector** | False | String | Contains regex to read the entity id from the web URL. |
+
 
