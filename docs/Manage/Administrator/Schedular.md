@@ -1,5 +1,5 @@
-| **Parameter** | **Mandatory** | **Type** | **Description** |
-|----------------|---------------|-----------|-----------------|
+| Parameter | Name | Required | Type | Description |
+|-----------|------|----------|------|--------------|
 |**inlineFile** | | False |  | Pass this parameter if you want to integrate inline files for a given entity type. Otherwise, do not send this parameter at all.<br>Attachment APIs must be implemented to integrate inline files. |
 | |**deleteSupported** | True | Boolean | Does the system allow deleting inline files? |
 | |**inlineFileStorageType** | True | Enum | Is the inline file/attachment stored at the entity or global level in the system?<br><br>Possible values:<br>1) ENTITY_LEVEL_STORAGE: When inline files are stored in the entity itself<br>2) EXTERNAL_STORAGE: When inline files are stored at the system level |
@@ -65,6 +65,7 @@
 |  | **entityURLDetails** | False |  | This field supports reverse sync for source URL/target URL option.<br><br>Provide the matcher or selector for the matching entity URL of the end system.<br>If the system supports HTML mentions, provide a JSoup matcher for URLs within `href`.<br>If the system supports Wiki, provide a regex for URLs.<br>If both HTML and Wiki mentions are supported, provide a list of entity URL details in mention metadata. |
 |  | **entityWebURLMatcher** | False | String | This field contains regex or selector to match entity web url |
 |  | **entityIdDataSelector** | False | String | This field contains regex to read the entity id from web url |
+
 
 
 
