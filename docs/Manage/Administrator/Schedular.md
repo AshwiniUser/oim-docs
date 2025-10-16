@@ -2,7 +2,7 @@
 | Parameter | Name | Required | Type | Description |
 |-----------|------|----------|------|--------------|
 | **fieldNameInfo** | | True |  | Provide the end system field details for all the fields that need to be integrated |
-|  |  |  | For below fields, specify name of the field under which OpsHub will get or send given information for an entity from SDK |
+|  |  |  |  |For below fields, specify name of the field under which OpsHub will get or send given information for an entity from SDK |
 | |**entityIdFieldName** | True | String | Name of the field that contains a unique and uneditable primary id of the entity |
 | | **entityTitleFieldName** | False | String | Name of the field that contains title of the entity (For e.g. name, title, summary). Provide this input only if field is to be synchronized as reference field. |
 | |**entityDisplayIdFieldName** | True | String | Name of the field that contains a user friendly id of the entity (For e.g. in Jira Issue Key will be entity display field and Issue Id will be entity id) |
@@ -126,6 +126,7 @@
 |  | **entityURLDetails** | False |  | This field supports reverse sync for source URL/target URL option.<br><br>Provide the matcher or selector for the matching entity URL of the end system.<br>If the system supports HTML mentions, provide a JSoup matcher for URLs within `href`.<br>If the system supports Wiki, provide a regex for URLs.<br>If both HTML and Wiki mentions are supported, provide a list of entity URL details in mention metadata. |
 |  | **entityWebURLMatcher** | False | String | This field contains regex or selector to match entity web url |
 |  | **entityIdDataSelector** | False | String | This field contains regex to read the entity id from web url |
+
 
 
 
