@@ -1,7 +1,7 @@
 | Parameter | Name | Required | Type | Description |
 |-----------|------|----------|------|-------------|
-| **link** | False |  | Pass this parameter if you want to integrate entity relationship for a given entity type. Otherwise, do not send this parameter at all. Links APIs must be implemented to integrate links |
-|  |**fieldNameInfo** | True | Object | <pre>{ "linkTypeFieldName": "linkType", "linkedEntityIdFieldName": "linkedEntityId", "linkedEntityTypeFieldName": "linkedEntityType", "linkedEntityScopeIdFieldName": "linkedEntityScopeId", "createdDateFieldName": "createdDate", "createdByFieldName": "createdBy", "linkCommentFieldName": "linkComment", "externalLinkUrlFieldName": "externalLinkUrl", "isExternalLinkFieldName": "isExternalLink" }</pre> |
+|  |**link** | False |  |Pass this parameter if you want to integrate entity relationship for a given entity type. Otherwise, do not send this parameter at all. Links APIs must be implemented to integrate links |
+|  |**fieldNameInfo** | True | Object | <pre>{&nbsp;"linkTypeFieldName":&nbsp;"linkType",&nbsp;"linkedEntityIdFieldName":&nbsp;"linkedEntityId",&nbsp;"linkedEntityTypeFieldName":&nbsp;"linkedEntityType",&nbsp;"linkedEntityScopeIdFieldName":&nbsp;"linkedEntityScopeId",&nbsp;"createdDateFieldName":&nbsp;"createdDate",&nbsp;"createdByFieldName":&nbsp;"createdBy",&nbsp;"linkCommentFieldName":&nbsp;"linkComment",&nbsp;"externalLinkUrlFieldName":&nbsp;"externalLinkUrl",&nbsp;"isExternalLinkFieldName":&nbsp;"isExternalLink"&nbsp;}</pre> |
 |  | deleteSupported | True | Boolean | Does the system allow to delete link? |
 | | historySupported | True | Boolean | Does the system support history for link? |
 |  |createUpdateDateFormat | True | String | Date format for created and updated dates of link |
@@ -57,6 +57,7 @@
 |  | **entityURLDetails** | False |  | This field supports reverse sync for source URL/target URL option.<br><br>Provide the matcher or selector for the matching entity URL of the end system.<br>If the system supports HTML mentions, provide a JSoup matcher for URLs within `href`.<br>If the system supports Wiki, provide a regex for URLs.<br>If both HTML and Wiki mentions are supported, provide a list of entity URL details in mention metadata. |
 |  | **entityWebURLMatcher** | False | String | This field contains regex or selector to match entity web url |
 |  | **entityIdDataSelector** | False | String | This field contains regex to read the entity id from web url |
+
 
 
 
