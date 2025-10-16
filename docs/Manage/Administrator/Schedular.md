@@ -1,8 +1,19 @@
 | Parameter | Name | Required | Type | Description |
 |-----------|------|----------|------|--------------|
+| **entityScope** | | False |  | If entity scope is decided based on only entity type and any additionalScopeField (like a project) is not required, this field can be set to null. |
+| | **additionalScopeFieldName** | True, if entityScope is passed. | Boolean | If entity scope is decided based on only entity type, this field can be set to null.<br>If entity scope is dependent on entity type as well as any other field of the entity (e.g., projectId, workspaceId, or domainId), provide that field name of the entity.<br>Ensure that this field name matches one of the field names in “entityFieldNameInfo”. |
+| **entityWebUrl** |  |False |  | Pass this if you want the Remote Entity Link feature enabled for the connector. Otherwise, do not include entityWebURL in response. |
+|  |**baseUrl** | True | String | String containing the base URL of the end system.<br>e.g., if the actual URL format is "https://example.com/browse/{0}/{1}" then set baseUrl as "https://example.com/" and trailingTemplate as "browse/{0}/{1}".<br>This URL is used to form the Remote Link. If value for the field "Base URL for Remote Link" is not given in the system configuration form, the baseUrl will be used by default to form Remote Link. |
+| | **trailingTemplate** | True | String | String template containing the trailing part of the URL format.<br>Provide all the dynamic parts in the URL as substitute numeric variables, e.g., {0}, {1} etc.<br>e.g., If the projectId is 101 and entity is 10001, the base URL is https://example.com/ and trailingTemplate is browse/<projectId>/<entityId>.<br>So, the actual web URL will be "https://example.com/browse/101/10001". |
+|  |**substitutes** | True | List | Map containing all the substitute numeric parameters to the replacement field name of the entity.<br>e.g., {"0": "projectIdFieldName", "1": "entityIdFieldName"}<br><br>In the “trailingTemplate":<br>* The value of parameter {0} will be replaced with actual value coming in field project id for the entity.<br>* The value of parameter {1} will be replaced with actual value coming in entity id for the entity.<br>Ensure that this field name matches one of the field names in “fieldNameInfo”. |
+| **isFieldIdConstantAcrossProjects** | | True | Boolean | Set to 'True' if the field id for the same field is same in different projects; else, set to 'False'.<br>e.g., If for a field with the display name 'Priority', field id in Project A is '100' and for Project B is '101', then send 'False'.<br>On the other hand, if the field id is the same (say 'priority' or '100') for all projects, then send 'True'.<br><br>If this is 'True', in FieldsMeta, we will use Field Id; otherwise, we will use Field Name. |
+| **isInternalValueExistForLookupField** |  | Boolean | Set to 'True' if the lookup fields have different internal and display values.<br>Set to 'False' if the lookup fields have only one value, the display value.<br><br>Example 1:<br><pre>"isInternalValueExistForLookupField": true<br>[<br>  { "id": "low", "value": "Low" },<br>  { "id": "medium", "value": "Medium" },<br>  { "id": "high", "value": "High" }<br>]</pre><br>Here, priority field has values having different internal value and display value.<br><br>Example 2:<br><pre>"isInternalValueExistForLookupField": false<br>[<br>  { "id": "Low", "value": "Low" },<br>  { "id": "Medium", "value": "Medium" },<br>  { "id": "High", "value": "High" }<br>]</pre><br>Here, the priority field does not have a different value for internal value. |
+
+
+| Parameter | Name | Required | Type | Description |
+|-----------|------|----------|------|--------------|
 | **isUpdateAvailable** | | False | Boolean | Set to 'True' if update is possible on the entity.<br>Set to 'False' if entity is create only. |
 | **waitTimeInMillisIfApiResponseDelayed** | |False | Number | In some systems, there is a delay in API returning updated data in response.<br><br>e.g., If an entity is updated:<br>* If within next second we try to fetch list of entities, the system might not return the last updated entity.<br>  But if we get the list of updated entities after 2 seconds, the system will start returning the entities.<br>  This delay might be due to indexing in the end system.<br><br>* Similarly, for history based systems, if we update an entity:<br>  The last revision might not be available in the audit API within a second or two.<br>  But if we query the revisions after 3 seconds, the system will start returning the revision.<br>  This delay might be due to system inserting audit records separately than the actual entity update.<br><br>OIM handles this type of delays for update up to 2 seconds (2000 milliseconds).<br>* If the end system has delay of up to 2 seconds, the value can be kept null.<br>* If the end system has delay of more than 2 seconds, provide the maximum delay value in milliseconds in this field. |
-
 
 | Parameter | Name | Required | Type | Description |
 |-----------|------|----------|------|--------------|
@@ -141,6 +152,7 @@
 |  | **entityURLDetails** | False |  | This field supports reverse sync for source URL/target URL option.<br><br>Provide the matcher or selector for the matching entity URL of the end system.<br>If the system supports HTML mentions, provide a JSoup matcher for URLs within `href`.<br>If the system supports Wiki, provide a regex for URLs.<br>If both HTML and Wiki mentions are supported, provide a list of entity URL details in mention metadata. |
 |  | **entityWebURLMatcher** | False | String | This field contains regex or selector to match entity web url |
 |  | **entityIdDataSelector** | False | String | This field contains regex to read the entity id from web url |
+
 
 
 
