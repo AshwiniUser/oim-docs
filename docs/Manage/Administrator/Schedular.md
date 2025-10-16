@@ -1,4 +1,15 @@
 
+| Parameter | Mandatory | Type | Description |
+|-----------|-----------|------|-------------|
+| **searchEntityInfo** | | True |  | All the metadata for querying end system to search entities. |
+| | **sortableFields** | False | Set<Enum> | Send set of fields for which end system supports sorting. For searchEntityInfo no need to pass REVISION_ID in sortableFields set.<br>*E.g. If end system supports sorting on both ENTITY_ID and CREATED_UPDATED_TIME,*<br>`sortableFields = {ENTITY_ID, CREATED_UPDATED_TIME}` |
+| | **isGroupingSupported** | True | Boolean | True (Preferred) if end system support order by for both created/updated time and entity id fields, otherwise false. If it is false, OpsHub will sort the results. |
+| |**isSearchPossibleOnAnyField** | True | Boolean | If criteria storage needs to be in the end system, then only set the field to true.<br>*The field selected for end system criteria should be queryable. If that's true, pass true here.*<br>To get more details on end system criteria storage, refer [[ Integration_Configuration#Criteria_Configuration | Criteria Configuration ]] |
+| **isCriteriaInSystemNativeFormat** | True | Boolean | Send 'True' if configured criteria in OIM will be in the end system native query format.<br>If 'Yes', the criteria can be the exact query that the end system supports.<br>If 'No', the criteria should be OpsHub standard JSON format query. |
+| |**dateTimeFormat** | True | String | Date time format supported within the query.<br>E.g., (where updatedDate > ‘2021-12-31 00:00:00’). Here, dateTimeFormat should be set as `yyyy-MM-dd HH:mm:ss` |
+| |**queryFieldNameInfo** | False |  | Query field names should be provided for entity id, entity type id, project id, created date, updated date and created by field.<br>If the query field name for the above fields is the same as their field id given in 'fieldNameInfo', then set this field as 'Null'. Otherwise, provide the end system field names used for querying. If these field names are provided, they will be used to generate queries. Here is a sample format of data to be passed under this parameter:<br><pre>"entityIdFieldName": "entity id field id",<br>&nbsp;&nbsp;"entityTypeIdFieldName": "entity type field id",<br>&nbsp;&nbsp;"projectIdFieldName": "project id’s field id",<br>&nbsp;&nbsp;"createdDateFieldName": "created date’s field id",<br>&nbsp;&nbsp;"updatedDateFieldName": "updated date’s field id",<br>&nbsp;&nbsp;"createdByFieldName": "created by field id"</pre> |
+| **batchSizeForInQuery** | False | Integer | Number of entities end system supports in "IN" or "OR" query. Default will be 250.<br>*E.g. for IN query:* `entityId IN (1, 2, 3)`<br>*E.g. for OR query:* `(entityId = 1) OR (entityId = 2) OR (entityId = 3)` |
+
 | Parameter | Name | Required | Type | Description |
 |-----------|------|----------|------|--------------|
 | **fieldNameInfo** | | True |  | Provide the end system field details for all the fields that need to be integrated |
@@ -13,7 +24,6 @@
 | | **createdByFieldName** | True | String | Name of the field that contains the created by user details of the entity |
 | |**updatedByFieldName** | True | String | Name of the field that contains the updated by user details of the entity |
 | | **archiveMetadata** | False | Object | Pass this metadata if the entity supports archive operation.<br><pre>"archiveMetadata": {<br>&nbsp;&nbsp;"archivedByFieldName": "Name of the field that contains Archived by User details of the entity",<br>&nbsp;&nbsp;"isArchivedFieldName": "Name of the field that contains If Entity is Archived details of the entity"<br>}</pre> |
-
 
 | Parameter | Name | Required | Type | Description |
 |-----------|------|----------|------|--------------|
@@ -126,6 +136,7 @@
 |  | **entityURLDetails** | False |  | This field supports reverse sync for source URL/target URL option.<br><br>Provide the matcher or selector for the matching entity URL of the end system.<br>If the system supports HTML mentions, provide a JSoup matcher for URLs within `href`.<br>If the system supports Wiki, provide a regex for URLs.<br>If both HTML and Wiki mentions are supported, provide a list of entity URL details in mention metadata. |
 |  | **entityWebURLMatcher** | False | String | This field contains regex or selector to match entity web url |
 |  | **entityIdDataSelector** | False | String | This field contains regex to read the entity id from web url |
+
 
 
 
