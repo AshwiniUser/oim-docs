@@ -1,3 +1,20 @@
+
+
+
+| Parameter | Name | Required | Type | Description |
+|-----------|------|----------|------|--------------|
+| **comment** |  | False | Pass this parameter if you want to integrate comments for a given entity type. Otherwise, do not send the comment parameter at all. If this parameter is passed, SDK must implement all the Comment APIs. |
+| |**fieldNameInfo** | True | Object | If the comment parameter is sent back, then it is mandatory to send fieldNameInfo. The user needs to send the field names as they will be sent by SDK to OpsHub when reading comments and from OpsHub to SDK when adding comments. OpsHub will try to find the given information in the field name specified as part of the data sent here.<br><pre>{ "idFieldName": "id", "titleFieldName": "title", "bodyFieldName": "body", "createdDateFieldName": "created", "updatedDateFieldName": "updated", "createdByFieldName": "createdBy", "updatedByFieldName": "updatedBy", "commentTypeFieldName": "commentType" }</pre> |
+| |**userMentionSupported** | False | Boolean | Send true if the user mention supported within comments; otherwise, false. |
+| |**entityMentionSupported** | False | Boolean | Send true if the user mention supported within comments; otherwise, false. |
+| |**commentBodyDataType** | True | Enum | TEXT, HTML, WIKI |
+| |**commentIdDataType** | True | Enum | NUMBER, TEXT |
+| **createdUpdatedByFieldDataType** | False | Enum | Pass this parameter if you need user data while creating comment. Example, you want to create comment with same user as source endpoint. If you require username send USERNAME_AS_USER, if you require email address send EMAIL_AS_USER. |
+| |**htmlReplacementForNewLine** | True | String | Exact value for new line character in the comment.<br>Possible values are: ‘<br/>’, ‘\n’ or null. |
+| |**createUpdateDateFormat** | True | String | Date format for created and updated dates of the comment. |
+| |**delayInCommentUpdateTimeInMillis** | False | Number | Expected delay between entity update time and comment update time.<br>There are systems in which comment update is delayed after entity update time. In such systems, identify the maximum delay that may be there in comment update time after entity update time.<br>If there is no delay in the system, the below value can be set as 0.<br>If there is delay of let say up to 2 seconds, set the value to 2000 (in millis). If the delay is up to 5 seconds, set the value to 5000. |
+| |**typesOfComments** | True | List<String> | The supported list of comment types. E.g., Internal, External, Work Notes, Additional etc. OpsHub will display these comment types under comment mapping. The user can map comment types across connectors to decide the type of comments they want to integrate. |
+
 | Parameter | Name | Required | Type | Description |
 |-----------|------|----------|------|--------------|
 |**attachment** |  | False |  | Pass this parameter if you want to integrate attachments for a given entity type. Otherwise, do not send the attachment parameter at all.<br>If this parameter is passed, SDK must implement all the Attachment APIs. |
@@ -76,6 +93,7 @@
 |  | **entityURLDetails** | False |  | This field supports reverse sync for source URL/target URL option.<br><br>Provide the matcher or selector for the matching entity URL of the end system.<br>If the system supports HTML mentions, provide a JSoup matcher for URLs within `href`.<br>If the system supports Wiki, provide a regex for URLs.<br>If both HTML and Wiki mentions are supported, provide a list of entity URL details in mention metadata. |
 |  | **entityWebURLMatcher** | False | String | This field contains regex or selector to match entity web url |
 |  | **entityIdDataSelector** | False | String | This field contains regex to read the entity id from web url |
+
 
 
 
