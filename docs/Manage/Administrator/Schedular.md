@@ -1,3 +1,8 @@
+| Parameter | Name | Required | Type | Description |
+|-----------|------|----------|------|--------------|
+| **isUpdateAvailable** | | False | Boolean | Set to 'True' if update is possible on the entity.<br>Set to 'False' if entity is create only. |
+| **waitTimeInMillisIfApiResponseDelayed** | |False | Number | In some systems, there is a delay in API returning updated data in response.<br><br>e.g., If an entity is updated:<br>* If within next second we try to fetch list of entities, the system might not return the last updated entity.<br>  But if we get the list of updated entities after 2 seconds, the system will start returning the entities.<br>  This delay might be due to indexing in the end system.<br><br>* Similarly, for history based systems, if we update an entity:<br>  The last revision might not be available in the audit API within a second or two.<br>  But if we query the revisions after 3 seconds, the system will start returning the revision.<br>  This delay might be due to system inserting audit records separately than the actual entity update.<br><br>OIM handles this type of delays for update up to 2 seconds (2000 milliseconds).<br>* If the end system has delay of up to 2 seconds, the value can be kept null.<br>* If the end system has delay of more than 2 seconds, provide the maximum delay value in milliseconds in this field. |
+
 
 | Parameter | Name | Required | Type | Description |
 |-----------|------|----------|------|--------------|
@@ -136,6 +141,7 @@
 |  | **entityURLDetails** | False |  | This field supports reverse sync for source URL/target URL option.<br><br>Provide the matcher or selector for the matching entity URL of the end system.<br>If the system supports HTML mentions, provide a JSoup matcher for URLs within `href`.<br>If the system supports Wiki, provide a regex for URLs.<br>If both HTML and Wiki mentions are supported, provide a list of entity URL details in mention metadata. |
 |  | **entityWebURLMatcher** | False | String | This field contains regex or selector to match entity web url |
 |  | **entityIdDataSelector** | False | String | This field contains regex to read the entity id from web url |
+
 
 
 
