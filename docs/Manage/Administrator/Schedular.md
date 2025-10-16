@@ -1,6 +1,6 @@
 
-| Parameter | Mandatory | Type | Description |
-|-----------|-----------|------|-------------|
+| Parameter | Name | Required | Type | Description |
+|-----------|------|----------|------|--------------|
 | **searchEntityInfo** | | True |  | All the metadata for querying end system to search entities. |
 | | **sortableFields** | False | Set`<Enum>` | Send set of fields for which end system supports sorting. For searchEntityInfo no need to pass REVISION_ID in sortableFields set.<br>*E.g. If end system supports sorting on both ENTITY_ID and CREATED_UPDATED_TIME,*<br>`sortableFields = {ENTITY_ID, CREATED_UPDATED_TIME}` |
 | | **isGroupingSupported** | True | Boolean | True (Preferred) if end system support order by for both created/updated time and entity id fields, otherwise false. If it is false, OpsHub will sort the results. |
@@ -136,6 +136,7 @@
 |  | **entityURLDetails** | False |  | This field supports reverse sync for source URL/target URL option.<br><br>Provide the matcher or selector for the matching entity URL of the end system.<br>If the system supports HTML mentions, provide a JSoup matcher for URLs within `href`.<br>If the system supports Wiki, provide a regex for URLs.<br>If both HTML and Wiki mentions are supported, provide a list of entity URL details in mention metadata. |
 |  | **entityWebURLMatcher** | False | String | This field contains regex or selector to match entity web url |
 |  | **entityIdDataSelector** | False | String | This field contains regex to read the entity id from web url |
+
 
 
 
