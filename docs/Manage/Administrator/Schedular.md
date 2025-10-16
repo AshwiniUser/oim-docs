@@ -1,5 +1,16 @@
 | Parameter | Name | Required | Type | Description |
 |-----------|------|----------|------|--------------|
+|**attachment** |  | False |  | Pass this parameter if you want to integrate attachments for a given entity type. Otherwise, do not send the attachment parameter at all.<br>If this parameter is passed, SDK must implement all the Attachment APIs. |
+| |**fieldNameInfo** | True | Object | If the attachment parameter is sent back, then it is mandatory to send fieldNameInfo. The user needs to send field names as they will be sent by SDK to OpsHub when reading attachments and from OpsHub to SDK when adding or updating attachments. OpsHub will try to find the given information in the field name specified as part of the data sent here.<br><br><pre>{<br>&nbsp;&nbsp;"idFieldName":&nbsp;"id",<br>&nbsp;&nbsp;"contentUriFieldName":&nbsp;"uri",<br>&nbsp;&nbsp;"renderUriFieldName":&nbsp;"renderUri",<br>&nbsp;&nbsp;"fileNameFieldName":&nbsp;"fileName",<br>&nbsp;&nbsp;"contentTypeFieldName":&nbsp;"contentType",<br>&nbsp;&nbsp;"contentLengthFieldName":&nbsp;"contentLength",<br>&nbsp;&nbsp;"createdOrUpdatedDateFieldName":&nbsp;"updated",<br>&nbsp;&nbsp;"createdByFieldName":&nbsp;"createdBy",<br>&nbsp;&nbsp;"attachmentTypeFieldName":&nbsp;"attachmentType"<br>}</pre><br>**contentUriFieldName:** The field which has the value as the URL to get/download the content of the attachment. If there's no such field in the end system, keep the fieldName as 'contentUri' and set the download link in that field in the actual attachment object.<br><br>**renderUriFieldName:** The field which has value as the URI to render/display the content of the attachment.<br><br>**Note:** This URI is not used to download an attachment. For downloading the attachment URI, refer to **contentUriFieldName**.<br><br>Example: If an inline image is shown with the `<img>` tag, render URI is the value of the `src` attribute of the `<img>` tag. |
+| |**updateSupported** | True | Boolean | Send true if the end system supports updating attachment via API; otherwise, false. If false, OpsHub will simulate update attachment behaviour by deleting the attachment and adding a new version. |
+| |**deleteSupported** | True | Boolean | Send true if the end system has an API to delete the attachment; otherwise, false. |
+| | **historySupported** | True | Boolean | Does the system support history for attachment? True if yes, else false. |
+| |**createUpdateDateFormat** | True | String | Date format for created and updated dates of the attachment. |
+| |**typesOfAttachments** | True | List&lt;String&gt; | Types of attachments supported by the system: INTERNAL, EXTERNAL, etc. |
+
+
+| Parameter | Name | Required | Type | Description |
+|-----------|------|----------|------|--------------|
 |**inlineFile** | | False |  | Pass this parameter if you want to integrate inline files for a given entity type. Otherwise, do not send this parameter at all.<br>Attachment APIs must be implemented to integrate inline files. |
 | |**deleteSupported** | True | Boolean | Does the system allow deleting inline files? |
 | |**inlineFileStorageType** | True | Enum | Is the inline file/attachment stored at the entity or global level in the system?<br><br>Possible values:<br>1) ENTITY_LEVEL_STORAGE: When inline files are stored in the entity itself<br>2) EXTERNAL_STORAGE: When inline files are stored at the system level |
@@ -65,6 +76,7 @@
 |  | **entityURLDetails** | False |  | This field supports reverse sync for source URL/target URL option.<br><br>Provide the matcher or selector for the matching entity URL of the end system.<br>If the system supports HTML mentions, provide a JSoup matcher for URLs within `href`.<br>If the system supports Wiki, provide a regex for URLs.<br>If both HTML and Wiki mentions are supported, provide a list of entity URL details in mention metadata. |
 |  | **entityWebURLMatcher** | False | String | This field contains regex or selector to match entity web url |
 |  | **entityIdDataSelector** | False | String | This field contains regex to read the entity id from web url |
+
 
 
 
